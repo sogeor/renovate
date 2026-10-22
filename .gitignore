@@ -1,0 +1,11 @@
+# Ignore everything
+/*
+
+# Presets
+!/*.json
+
+# Repository files
+!/.github/
+!/.gitignore
+!/LICENSE
+!/README.md
