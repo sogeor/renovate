@@ -4,7 +4,24 @@
         "config:recommended",
         "helpers:pinGitHubActionDigests"
     ],
+    "packageRules": [
+        {
+            "description": "Dependency updates are commit type deps (CHANGELOG section Changed)",
+            "matchPackageNames": ["*"],
+            "semanticCommitScope": null,
+            "semanticCommitType": "deps"
+        },
+        {
+            "automerge": true,
+            "description": "Own reusable workflows: one PR per release in every repository, merged when the required checks pass",
+            "groupName": "sogeor/workflows",
+            "matchManagers": ["github-actions"],
+            "matchPackageNames": ["sogeor/workflows"],
+            "platformAutomerge": true
+        }
+    ],
     "pre-commit": {
         "enabled": true
-    }
+    },
+    "semanticCommits": "enabled"
 }
