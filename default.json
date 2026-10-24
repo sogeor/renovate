@@ -4,6 +4,7 @@
         "config:recommended",
         "helpers:pinGitHubActionDigests"
     ],
+    "minimumReleaseAge": "7 days",
     "packageRules": [
         {
             "description": "Dependency updates are commit type deps (CHANGELOG section Changed)",
@@ -13,10 +14,27 @@
         },
         {
             "automerge": true,
+            "description": "Non-major GitHub Actions updates: one PR, merged when the required checks pass",
+            "groupName": "github-actions (non-major)",
+            "matchManagers": ["github-actions"],
+            "matchUpdateTypes": ["digest", "minor", "patch", "pinDigest"],
+            "platformAutomerge": true
+        },
+        {
+            "automerge": true,
+            "description": "Non-major pre-commit hook updates: one PR, merged when the required checks pass",
+            "groupName": "pre-commit (non-major)",
+            "matchManagers": ["pre-commit"],
+            "matchUpdateTypes": ["digest", "minor", "patch", "pinDigest"],
+            "platformAutomerge": true
+        },
+        {
+            "automerge": true,
             "description": "Own reusable workflows: one PR per release in every repository, merged when the required checks pass",
             "groupName": "sogeor/workflows",
             "matchManagers": ["github-actions"],
             "matchPackageNames": ["sogeor/workflows"],
+            "minimumReleaseAge": null,
             "platformAutomerge": true
         }
     ],
