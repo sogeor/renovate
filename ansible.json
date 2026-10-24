@@ -1,0 +1,18 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "customManagers": [
+        {
+            "customType": "regex",
+            "description": "Versions annotated with '# renovate: datasource=... depName=... [registryUrl=...] [versioning=...] [extractVersion=...]' on the line above",
+            "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^(?<version>.+)${{/if}}",
+            "managerFilePatterns": [
+                "/(^|/)(group_vars|host_vars)/.+\\.ya?ml$/",
+                "/(^|/)roles/[^/]+/(defaults|vars)/.+\\.ya?ml$/"
+            ],
+            "matchStrings": [
+                "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+registryUrl=(?<registryUrl>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?\\s*\\n\\s*[\\w-]+:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"
+            ],
+            "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
+        }
+    ]
+}
