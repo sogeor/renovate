@@ -3,14 +3,14 @@
     "customManagers": [
         {
             "customType": "regex",
-            "description": "Versions annotated with '# renovate: datasource=... depName=... [registryUrl=...] [versioning=...] [extractVersion=...]' on the line above",
+            "description": "Versions annotated with '# renovate: datasource=... depName=... [registryUrl=...] [versioning=...] [extractVersion=...]' on the line above; a value 'tag@sha256:...' also pins the digest",
             "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^(?<version>.+)${{/if}}",
             "managerFilePatterns": [
                 "/(^|/)(group_vars|host_vars)/.+\\.ya?ml$/",
                 "/(^|/)roles/[^/]+/(defaults|vars)/.+\\.ya?ml$/"
             ],
             "matchStrings": [
-                "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+registryUrl=(?<registryUrl>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?\\s*\\n\\s*[\\w-]+:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"
+                "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+registryUrl=(?<registryUrl>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?\\s*\\n\\s*[\\w-]+:\\s*\"?(?<currentValue>[^\"\\s@]+)(@(?<currentDigest>sha256:[a-f0-9]{64}))?\"?"
             ],
             "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
         }
